@@ -434,15 +434,17 @@ class iTermWindowCornerRadiusDetector: NSObject {
         return bestRadius
     }
 
-    // Separate function to isolate the deprecation warning
-    @available(macOS, deprecated: 14.0, message: "Use ScreenCaptureKit instead")
+    // macports: CGWindowListCreateImage is fully unavailable (not just
+    // deprecated) as of the macOS 27 SDK -- an `unavailable` symbol is a
+    // hard compile error Swift never allows suppressing via warning flags,
+    // unlike plain deprecation. detectRadius()'s only caller already
+    // treats a nil return as a normal, logged failure path (window corner
+    // radius detection is a cosmetic heuristic, not core functionality),
+    // so drop the call entirely rather than gate it behind an SDK version
+    // that has no working replacement wired up here. Droppable once this
+    // is ported to ScreenCaptureKit upstream.
     private static func captureWindow(windowID: CGWindowID) -> CGImage? {
-        return CGWindowListCreateImage(
-            .null,
-            .optionIncludingWindow,
-            windowID,
-            [.boundsIgnoreFraming]
-        )
+        return nil
     }
 
     private static func createBitmapContext(width: Int, height: Int) -> CGContext? {
