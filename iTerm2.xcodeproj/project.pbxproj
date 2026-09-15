@@ -9747,7 +9747,6 @@
 		A6FCB6091C6714230019184E /* iTermFullScreenWindowManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iTermFullScreenWindowManager.m; sourceTree = "<group>"; };
 		A6FCB60C1C6714C70019184E /* iTermWeakReference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iTermWeakReference.h; sourceTree = "<group>"; };
 		A6FCB60D1C6714C70019184E /* iTermWeakReference.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = iTermWeakReference.m; sourceTree = "<group>"; };
-		A6FD5F7325AC296400006234 /* libgit2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgit2.a; path = ThirdParty/libgit2/lib/libgit2.a; sourceTree = "<group>"; };
 		A6FD5F9125AC2ADC00006234 /* iTermGitState+MainApp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iTermGitState+MainApp.h"; sourceTree = "<group>"; };
 		A6FD5F9225AC2ADC00006234 /* iTermGitState+MainApp.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "iTermGitState+MainApp.m"; sourceTree = "<group>"; };
 		A6FD852E1B767D6300EB9DCE /* Hamburger.png */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Hamburger.png; path = images/Hamburger.png; sourceTree = "<group>"; };
@@ -10862,7 +10861,6 @@
 				A6588821201708D8006F48DB /* IOKit.framework */,
 				756C32C12597AC9C0047B3A9 /* libaprutil-1.tbd */,
 				A656AE4B1DBBE1CE00CE8448 /* libaprutil-1.tbd */,
-				A6FD5F7325AC296400006234 /* libgit2.a */,
 				1DD39B7A180B8842004E56D5 /* libicucore.dylib */,
 				A6A73D4727C8049E002E4CCA /* libicucore.tbd */,
 				A60D20E52597FAFB004AC979 /* libsandbox.tbd */,
@@ -25303,7 +25301,7 @@
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/ThirdParty/libgit2/lib",
+					"@PREFIX@/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -25317,14 +25315,14 @@
 				OTHER_LDFLAGS = (
 					"-liconv",
 					"-lz",
-					$PROJECT_DIR/ThirdParty/libgit2/lib/libgit2.a,
+					"-lgit2",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.iterm2.pidinfo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
-				USER_HEADER_SEARCH_PATHS = $PROJECT_DIR/ThirdParty/libgit2/include;
+				USER_HEADER_SEARCH_PATHS = "@PREFIX@/include";
 				VALID_ARCHS = "$(ARCHS_STANDARD)";
 			};
 			name = Development;
@@ -25385,7 +25383,7 @@
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/ThirdParty/libgit2/lib",
+					"@PREFIX@/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -25397,14 +25395,14 @@
 				OTHER_LDFLAGS = (
 					"-liconv",
 					"-lz",
-					$PROJECT_DIR/ThirdParty/libgit2/lib/libgit2.a,
+					"-lgit2",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.iterm2.pidinfo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
-				USER_HEADER_SEARCH_PATHS = $PROJECT_DIR/ThirdParty/libgit2/include;
+				USER_HEADER_SEARCH_PATHS = "@PREFIX@/include";
 				VALID_ARCHS = "$(ARCHS_STANDARD)";
 			};
 			name = Deployment;
@@ -25465,7 +25463,7 @@
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/ThirdParty/libgit2/lib",
+					"@PREFIX@/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -25477,14 +25475,14 @@
 				OTHER_LDFLAGS = (
 					"-liconv",
 					"-lz",
-					$PROJECT_DIR/ThirdParty/libgit2/lib/libgit2.a,
+					"-lgit2",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.iterm2.pidinfo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
-				USER_HEADER_SEARCH_PATHS = $PROJECT_DIR/ThirdParty/libgit2/include;
+				USER_HEADER_SEARCH_PATHS = "@PREFIX@/include";
 				VALID_ARCHS = "$(ARCHS_STANDARD)";
 			};
 			name = Beta;
@@ -25545,7 +25543,7 @@
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/ThirdParty/libgit2/lib",
+					"@PREFIX@/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -25557,14 +25555,14 @@
 				OTHER_LDFLAGS = (
 					"-liconv",
 					"-lz",
-					$PROJECT_DIR/ThirdParty/libgit2/lib/libgit2.a,
+					"-lgit2",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.iterm2.pidinfo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
-				USER_HEADER_SEARCH_PATHS = $PROJECT_DIR/ThirdParty/libgit2/include;
+				USER_HEADER_SEARCH_PATHS = "@PREFIX@/include";
 				VALID_ARCHS = "$(ARCHS_STANDARD)";
 			};
 			name = Nightly;
