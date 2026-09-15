@@ -304,7 +304,7 @@ Beta:
 	chmod -R go+rX $(BUILD_DIR)/Beta
 
 Deployment:
-	xcodebuild -scheme iTerm2 -configuration Deployment -destination 'platform=macOS' -skipPackagePluginValidation $(SIGNING_FLAGS) $(ARCH_FLAGS) SYMROOT="$(BUILD_DIR)" MACOSX_DEPLOYMENT_TARGET=$(DEPLOYMENT_TARGET) ENABLE_ADDRESS_SANITIZER=NO && \
+	xcodebuild -scheme iTerm2 -configuration Deployment -destination 'platform=macOS' -skipPackagePluginValidation $(SPM_FLAGS) $(SIGNING_FLAGS) $(ARCH_FLAGS) SYMROOT="$(BUILD_DIR)" MACOSX_DEPLOYMENT_TARGET=$(DEPLOYMENT_TARGET) ENABLE_ADDRESS_SANITIZER=NO && \
 	chmod -R go+rX $(BUILD_DIR)/Deployment
 
 Nightly: force
