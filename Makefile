@@ -304,7 +304,7 @@ Beta:
 	chmod -R go+rX $(BUILD_DIR)/Beta
 
 Deployment:
-	xcodebuild -scheme iTerm2 -configuration Deployment -destination 'platform=macOS' -skipPackagePluginValidation $(SIGNING_FLAGS) $(ARCH_FLAGS) SYMROOT="$(BUILD_DIR)" ENABLE_ADDRESS_SANITIZER=NO && \
+	xcodebuild -scheme iTerm2 -configuration Deployment -destination 'platform=macOS' -skipPackagePluginValidation $(SIGNING_FLAGS) $(ARCH_FLAGS) SYMROOT="$(BUILD_DIR)" MACOSX_DEPLOYMENT_TARGET=$(DEPLOYMENT_TARGET) ENABLE_ADDRESS_SANITIZER=NO && \
 	chmod -R go+rX $(BUILD_DIR)/Deployment
 
 Nightly: force
@@ -517,10 +517,11 @@ CoreParse: force
 	cd submodules/CoreParse && xcodebuild -target CoreParse -configuration Release CONFIGURATION_BUILD_DIR=../../ThirdParty VALID_ARCHS="arm64 x86_64" $(SIGNING_FLAGS) $(ARCH_FLAGS)
 	cp "submodules/CoreParse//CoreParse/Tokenisation/Token Recognisers/CPRegexpRecogniser.h" ThirdParty/CoreParse.framework/Versions/A/Headers/CPRegexpRecogniser.h
 
-NMSSH: force fatlibssh2
+NMSSH: force
 	echo Begin building NMSSH
 	rm -rf ThirdParty/NMSSH.framework
-	cp submodules/libssh2/include/* submodules/NMSSH/NMSSH-OSX/Libraries/include/libssh2
+	cp @PREFIX@/include/libssh2.h @PREFIX@/include/libssh2_publickey.h @PREFIX@/include/libssh2_sftp.h submodules/NMSSH/NMSSH-OSX/Libraries/include/libssh2
+	cp @PREFIX@/lib/libssh2.a @PREFIX@/lib/openssl-3/libcrypto.a @PREFIX@/lib/openssl-3/libssl.a submodules/NMSSH/NMSSH-OSX/Libraries/lib
 	cd submodules/NMSSH && xcodebuild -target NMSSH -project NMSSH.xcodeproj -configuration Release CONFIGURATION_BUILD_DIR=../../ThirdParty $(SIGNING_FLAGS) $(ARCH_FLAGS)
 
 paranoid-NMSSH: force
