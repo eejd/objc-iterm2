@@ -1419,19 +1419,11 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
             relatedView:nil
                    type:kPreferenceInfoTypeCheckbox];
 
-    [self defineControl:_checkUpdate
-                    key:kPreferenceKeyCheckForUpdatesAutomatically
-            relatedView:nil
-                   type:kPreferenceInfoTypeCheckbox];
-    if ([NSBundle it_isNightlyBuild]) {
-        _checkTestRelease.enabled = NO;
-    } else {
-        _nightlyBuildNotice.hidden = YES;
-    }
-    [self defineControl:_checkTestRelease
-                    key:kPreferenceKeyCheckForTestReleases
-            relatedView:nil
-                   type:kPreferenceInfoTypeCheckbox];
+    // MacPorts build: in-app updates are disabled (upgrades come from
+    // `port upgrade`), so the Sparkle checkboxes are hidden rather than bound.
+    _checkUpdate.hidden = YES;
+    _checkTestRelease.hidden = YES;
+    _nightlyBuildNotice.hidden = YES;
 
     // ---------------------------------------------------------------------------------------------
     info = [self defineControl:_useCustomScriptsFolder

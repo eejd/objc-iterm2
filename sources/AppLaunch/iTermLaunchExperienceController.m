@@ -114,10 +114,8 @@ typedef NS_ENUM(NSUInteger, iTermLaunchExperienceChoice) {
             return self;
         }
         const NSInteger runCount = [iTermLaunchExperienceController incrementRunCount];
-        if (runCount == 2 && ![[SUUpdater sharedUpdater] automaticallyChecksForUpdates]) {
-            // Sparkle will do its thing this launch.
-            _choice = iTermLaunchExperienceChoiceNone;
-        } else if ([iTermLaunchExperienceController quelled]) {
+        (void)runCount;  // MacPorts build: no Sparkle prompt to defer to.
+        if ([iTermLaunchExperienceController quelled]) {
             // Do nothing, we're quelled.
             _choice = iTermLaunchExperienceChoiceNone;
         } else {
