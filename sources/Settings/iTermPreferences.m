@@ -698,7 +698,7 @@ static void iTermPreferencesRefreshFastCachesForKey(NSString *key);
                   kPreferenceKeySavePasteAndCommandHistory: @NO,
                   kPreferenceKeyAddBonjourHostsToProfiles: @NO,
                   kPreferenceKeyNotifyOnlyForCriticalShellIntegrationUpdates: @YES,
-                  kPreferenceKeyCheckForUpdatesAutomatically: @YES,
+                  kPreferenceKeyCheckForUpdatesAutomatically: @NO,  // MacPorts build: in-app updates disabled
                   kPreferenceKeyCheckForTestReleases: @NO,
                   kPreferenceKeyLoadPrefsFromCustomFolder: @NO,
                   kPreferenceKeyUseCustomScriptsFolder: @NO,

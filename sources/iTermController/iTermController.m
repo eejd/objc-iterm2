@@ -1349,21 +1349,14 @@ replaceInitialDirectoryForSessionWithGUID:(NSString *)guid
 }
 
 - (void)refreshSoftwareUpdateUserDefaults {
-    BOOL checkForTestReleases = [iTermPreferences boolForKey:kPreferenceKeyCheckForTestReleases];
-    NSString *appCast = checkForTestReleases ?
-        [[NSBundle mainBundle] objectForInfoDictionaryKey:@"SUFeedURLForTesting"] :
-        [[NSBundle mainBundle] objectForInfoDictionaryKey:@"SUFeedURLForFinal"];
-    NSURL *url = [NSURL URLWithString:appCast];
-    NSNumber *shard = @([iTermController shard]);
-    url = [url URLByAppendingQueryParameter:[NSString stringWithFormat:@"shard=%@", shard]];
-    [[iTermUserDefaults userDefaults] setObject:url.absoluteString forKey:@"SUFeedURL"];
-    // Allow Sparkle to update from a zip file containing an "iTerm" directory,
-    // even though our bundle name is now "iTerm2". I had to add this feature
-    // to my fork of Sparkle so I could change the app's name without breaking
-    // auto-update. https://github.com/gnachman/Sparkle, commit
-    // bd6a8df6e63b843f1f8aff79f40bd70907761a99.
-    [[iTermUserDefaults userDefaults] setObject:@"iTerm"
-                                              forKey:@"SUFeedAlternateAppNameKey"];
+    // MacPorts build: in-app updates are disabled (upgrades come from
+    // `port upgrade`). Upstream wrote a Sparkle feed URL into user defaults on
+    // every launch; instead, remove any feed a previous (upstream or
+    // pre-fix) build left behind so Sparkle can never be pointed anywhere.
+    NSUserDefaults *ud = [iTermUserDefaults userDefaults];
+    [ud removeObjectForKey:@"SUFeedURL"];
+    [ud removeObjectForKey:@"SUFeedAlternateAppNameKey"];
+    [ud setBool:NO forKey:@"SUEnableAutomaticChecks"];
 }
 
 - (BOOL)selectionRespectsSoftBoundaries {

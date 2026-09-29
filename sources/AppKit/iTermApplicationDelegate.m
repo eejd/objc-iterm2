@@ -1814,11 +1814,6 @@ static iTermKeyEventReplayer *gReplayer;
 
     [[iTermBuriedSessions sharedInstance] setMenus:[NSArray arrayWithObjects:_buriedSessions, _statusIconBuriedSessions, nil]];
 
-    item = [[[NSMenuItem alloc] initWithTitle:@"Check For Updates"
-                                       action:@selector(checkForUpdatesFromMenu:)
-                                keyEquivalent:@""] autorelease];
-    [menu addItem:item];
-
     NSMenuItem *mainMenuItem = [[[NSMenuItem alloc] initWithTitle:@"Main Menu" action:nil keyEquivalent:@""] autorelease];
     mainMenuItem.submenu = [[NSApp mainMenu] it_deepCopy];
     [menu addItem:mainMenuItem];
@@ -2349,9 +2344,9 @@ static iTermKeyEventReplayer *gReplayer;
                                 identifier:@"NoSyncVeryOldNightlyBuildWarning"
                                silenceable:kiTermWarningTypeSilenceableForOneMonth
                                     window:nil];
-        if (selection == kiTermWarningSelection1) {
-            [[SUUpdater sharedUpdater] checkForUpdates:nil];
-        }
+        // MacPorts build: "Update Now" must not instantiate SUUpdater (that
+        // starts Sparkle's check cycle); upgrades come from `port upgrade`.
+        (void)selection;
     }
 }
 
@@ -2498,7 +2493,9 @@ static iTermKeyEventReplayer *gReplayer;
 }
 
 - (IBAction)checkForUpdatesFromMenu:(id)sender {
-    [suUpdater checkForUpdates:(sender)];
+    // MacPorts build: in-app updates are disabled; upgrade with `port upgrade`.
+    // The menu items that sent this were removed; never touch SUUpdater, since
+    // instantiating it starts Sparkle's check cycle.
 }
 
 // Depth-first search for the menu item wired to a given action, so a
